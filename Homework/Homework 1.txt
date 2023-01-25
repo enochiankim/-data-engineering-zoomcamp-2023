@@ -1,0 +1,39 @@
+Question 1
+
+docker --help --> docker build --> docker build --help
+
+Question 2
+
+winpty docker run -it --entrypoint bash python:3.9 --> pip list --> (you can see total)
+
+
+Question 3
+select count(*) as date  from green_taxi_trips
+ where to_char(lpep_pickup_datetime, 'YYYY-MM-DD') = '2019-01-15' and to_char(lpep_dropoff_datetime, 'YYYY-MM-DD') = '2019-01-15';
+
+Question 4
+
+select * from green_taxi_trips
+order by trip_distance desc
+
+Question 5
+
+select count(passenger_count), passenger_count from green_taxi_trips
+where to_char(lpep_pickup_datetime, 'YYYY-MM-DD') = '2019-01-01' or to_char(lpep_dropoff_datetime, 'YYYY-MM-DD') = '2019-01-01'
+group by passenger_count
+having passenger_count = 2 or passenger_count = 3;
+
+Question 6
+
+SELECT
+    total_amount,
+	tip_amount,
+	z2."Zone"
+	
+FROM
+    green_taxi_trips t JOIN zones z
+        ON t."PULocationID" = z."LocationID"
+		JOIN zones z2
+        ON t."DOLocationID" = z2."LocationID"
+		where t."PULocationID" = 7
+		order by tip_amount desc;
