@@ -1,13 +1,22 @@
+"""
+The following commands were used for this question
+prefect deployment build etl_web_to_gcs_Question_5.py:etl_web_to_gcs -n "slack-note-q5" -t dev
+prefect deployment build apply etl_web_to_gcs-deployment.yaml
+"""
+
 from pathlib import Path
 import pandas as pd
 from prefect import flow, task
-from random import randint
-from prefect.filesystems import GitHub
 from prefect_gcp.cloud_storage import GcsBucket
+from random import randint
+from prefect.blocks.notifications import SlackWebhook
 
 @task(retries=3)
 def fetch(dataset_url: str) -> pd.DataFrame:
     """Read taxi data from web into pandas DataFrame"""
+    # if randint(0, 1) > 0:
+    #     raise Exception
+
     df = pd.read_csv(dataset_url)
     return df
 
@@ -26,7 +35,7 @@ def clean(df: pd.DataFrame) -> pd.DataFrame:
 @task()
 def write_local(df: pd.DataFrame, color: str, dataset_file: str) -> Path:
     """Write DataFrame out locally as parquet file"""
-    path = Path(f"C:/Users/Enkim/Desktop/week2_data_engine/prefect-zoomcamp/flows/02_gcp/{dataset_file}.parquet")
+    path = Path(f"**********************************************{dataset_file}.parquet")
     df.to_parquet(path, compression="gzip")
     return path
 
@@ -40,11 +49,11 @@ def write_gcs(path: Path) -> None:
 
 
 @flow()
-def etl_web_to_git() -> None:
+def etl_web_to_gcs() -> None:
     """The main ETL function"""
     color = "green"
-    year = 2020
-    month = 11
+    year = 2019
+    month = 4
     dataset_file = f"{color}_tripdata_{year}-{month:02}"
     dataset_url = f"https://github.com/DataTalksClub/nyc-tlc-data/releases/download/{color}/{dataset_file}.csv.gz"
 
@@ -53,6 +62,5 @@ def etl_web_to_git() -> None:
     path = write_local(df_clean, color, dataset_file)
     write_gcs(path)
 
-
 if __name__ == "__main__":
-    etl_web_to_git()
+    etl_web_to_gcs()

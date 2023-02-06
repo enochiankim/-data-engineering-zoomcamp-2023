@@ -1,3 +1,8 @@
+"""
+The following commands were used:
+prefect deployment build ./etl_web_to_git.py:etl_web_to_git -n "GitHub Storage Flow" -sb github/homework2/ -o github_deployment.yaml --apply 
+"""
+
 from pathlib import Path
 import pandas as pd
 from prefect import flow, task

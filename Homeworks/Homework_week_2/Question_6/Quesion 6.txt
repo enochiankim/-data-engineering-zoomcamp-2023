@@ -1,8 +1,8 @@
-question 6 
+This is the following block code for question 6
 
 from prefect.blocks.system import Secret
 
-secret_block = Secret.load("homework2")
+secret_block = Secret.load("*********")
 
 # Access the stored secret
 secret_block.get()
