@@ -1,0 +1,8 @@
+question 6 
+
+from prefect.blocks.system import Secret
+
+secret_block = Secret.load("homework2")
+
+# Access the stored secret
+secret_block.get()

@@ -1,0 +1,3 @@
+question 2 0 5 1 * * 
+
+prefect deployment build flows/02_gcp/etl_web_to_gcs.py:etl_web_to_gcs -n etl --cron "0 5 1 * *" -a  
