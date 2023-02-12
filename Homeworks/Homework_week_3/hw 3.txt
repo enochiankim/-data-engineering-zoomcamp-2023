@@ -1,0 +1,54 @@
+Question 1: 
+
+Answer: 43,244,696
+
+CREATE OR REPLACE EXTERNAL TABLE `dezoomcamp.fhv_tripdata_2019`
+OPTIONS (
+  format = 'CSV',
+  uris = ['gs://prefect-de-zoomcamp_1/Hw3/fhv_tripdata_2019-*.csv.gz']
+);
+
+
+SELECT count(*) FROM `dezoomcamp.fhv_tripdata`;
+
+Question 2: 
+
+Answer: 0 MB for the External Table and 317.94MB for the BQ Table
+
+SELECT COUNT(DISTINCT(Affiliated_base_number)) FROM `dezoomcamp.fhv_tripdata`;
+
+SELECT COUNT(DISTINCT(Affiliated_base_number)) FROM `*******.fhv_tripdata.tripdata_table`;
+
+Question 3: 
+
+Answer: 717,748
+
+SELECT COUNT(*) FROM `dezoomcamp.fhv_tripdata`
+where PUlocationID is null and DOlocationID is null;
+
+Question 4:
+
+Answer: Partition by pickup_datetime Cluster on affiliated_base_number
+
+Question 5:
+
+Answer: 647.87 MB for non-partitioned table and 23.06 MB for the partitioned table
+
+SELECT COUNT(DISTINCT(Affiliated_base_number)) FROM `fhv_tripdata.tripdata_table`
+WHERE dropoff_datetime BETWEEN '2019-01-01' AND '2019-03-31'
+
+SELECT COUNT(DISTINCT(Affiliated_base_number))  
+FROM `********.fhv_tripdata.fhv_partitioned_tripdata` 
+WHERE pickup_datetime >= '2019-03-01' and pickup_datetime <= '2019-03-31'
+
+Question 6:
+
+Answer: GCP Bucket
+
+Question 7: 
+
+Answer: True
+
+Clustering improves filtering and aggregation queries, however it typically 
+doesn't show much improvement for tables with less than 1 GB of data.
+
