@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+    - name: staging
+      #For bigquery:
+      database: prefect-de-zoomcamp-376500
+
+      schema: stock_data_table
+
+      # loaded_at_field: record_loaded_at
+      tables:
+        - name: faang_stock_data
+        - name: Stock_Symbol
