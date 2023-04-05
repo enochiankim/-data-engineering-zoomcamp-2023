@@ -37,7 +37,7 @@ models:
 
 seeds:
   Final_Project:
-    faang_stock_data:
+    faang_stock_data_partitioned:
       +column_types:
         Date: Date 
         Open: float
@@ -46,4 +46,4 @@ seeds:
         Close: float
         Adj_Close: float
         Volume: float
-        Company_Name: string
+        file_name: string
