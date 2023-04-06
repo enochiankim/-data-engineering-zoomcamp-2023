@@ -11,17 +11,18 @@ stock_data_main as (
     Adj_Close,
     Volume,
     file_name 
-    from {{ref("faang_stock_data")}}),
+    from 
+    {{ref("faang_stock_data")}}),
     
     stock_data_symbol as (
         select 
         Company,
         Stock_Symbol 
-        from {{ref("faang_stock_symbol")}})
+        from 
+        {{ref("faang_stock_symbol")}})
 
 select 
-s.company as Company,
-s.Stock_Symbol as Ticker_Symbol,
+s.Stock_Symbol,
 Date,
 Open,
 High, 
